@@ -67,7 +67,7 @@ jobs:
       - run: cd starter/frontend && npm ci
 
       # Build the application.
-      - run:
+      # - run:
 
       # Send a console message at completion.
       - run: |
