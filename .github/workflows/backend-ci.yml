@@ -92,8 +92,8 @@ jobs:
       - name: Check the running application
         run: curl http://localhost:5000/movies
 
-      - name: Check the logs
-        run: docker logs -f mp-backend
+      # - name: Check the logs
+      #  run: docker logs -f mp-backend
 
       - name: Stop the application
         run: docker stop
