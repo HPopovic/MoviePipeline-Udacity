@@ -71,11 +71,8 @@ jobs:
 
       # Build the application.
       - name: Build docker image
-        run: docker build --build-arg=${{REACT_APP_MOVIE_API_URL}} --tag=mp-frontend:latest .
+        run: docker build --build-arg=${{env.REACT_APP_MOVIE_API_URL}} --tag=mp-frontend:latest .
           
       - name: Run docker image    
         run: docker run --name mp-frontend -p 3000:3000 -d mp-frontend
-
-      - name: Check the logs
-        run: docker logs -f mp-frontend
 
