@@ -1,5 +1,8 @@
 name: frontend-ci-workflow
 
+env:
+  REACT_APP_MOVIE_API_URL: 'http://localhost:5000'
+
 on:
   # Run on demand
   workflow_dispatch:
@@ -67,8 +70,12 @@ jobs:
       - run: cd starter/frontend && npm ci
 
       # Build the application.
-      # - run:
+      - name: Build docker image
+        run: docker build --build-arg=${{REACT_APP_MOVIE_API_URL}} --tag=mp-frontend:latest .
+          
+      - name: Run docker image    
+        run: docker run --name mp-frontend -p 3000:3000 -d mp-frontend
 
-      # Send a console message at completion.
-      - run: |
-          echo "Front end build complete"
+      - name: Check the logs
+        run: docker logs -f mp-frontend
+
