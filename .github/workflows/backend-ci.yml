@@ -28,7 +28,7 @@ jobs:
       # Install the dependencies using pipenv
       - name: Install pipenv
         run: curl https://raw.githubusercontent.com/pypa/pipenv/master/get-pipenv.py | python
-      - run: cd starter/backend && pipenv install
+      - run: cd starter/backend && pipenv install --dev
 
       # Run the linter.
       - run: cd starter/backend && pipenv run lint
@@ -74,7 +74,7 @@ jobs:
           cache: 'pipenv'
           cache-dependency-path: '**/backend/Pipfile.lock'
       - run: python -m pip install --upgrade pip
-      
+
       # Cache action to restore cache.
 
       # Install the dependencies using pipenv
