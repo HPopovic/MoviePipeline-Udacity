@@ -82,7 +82,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
    
-      # Deploy the application to ECR
+      # Deploy the image to ECR
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
@@ -97,16 +97,16 @@ jobs:
           docker build --build-arg=${{env.REACT_APP_MOVIE_API_URL}} --tag=$REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
-      # Figure out Kubernetes steps
-      #- name: Update kubeconfig
-      #  run: cd starter/frontend/k8s && aws eks update-kubeconfig`
+      # Deploy the containerised image to the cluster
+      - name: Update kubeconfig
+        run: cd starter/frontend/k8s && aws eks update-kubeconfig`
 
-      #- name: Set image tag from build stage
-      #  run: cd starter/frontend/k8s && kustomize edit set image frontend=<ECR_REPO_URL>:<NEW_TAG_HERE>
+      - name: Set image tag from build stage
+        run: cd starter/frontend/k8s && kustomize edit set image frontend=${{ steps.login-ecr.outputs.registry }}:${{ github.sha }}
 
-      #- name: Apply the Kubernetes manifests to the cluster
-      #  run: |
-      #    cd starter/frontend/k8s && kustomize build
-      #    cd starter/frontend/k8s && kubectl apply -f -
+      - name: Apply the Kubernetes manifests to the cluster
+        run: |
+          cd starter/frontend/k8s && kustomize build
+          cd starter/frontend/k8s && kubectl apply -f -
 
       

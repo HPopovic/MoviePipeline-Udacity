@@ -110,16 +110,16 @@ jobs:
           docker build --tag=$REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
       
-      # Figure out Kubernetes steps
-      #- name: Update kubeconfig
-      #  run: cd starter/frontend/k8s && aws eks update-kubeconfig`
+      # Deploy the containerised image to the cluster
+      - name: Update kubeconfig
+        run: cd starter/backend/k8s && aws eks update-kubeconfig`
 
-      #- name: Set image tag from build stage
-      #  run: cd starter/frontend/k8s && kustomize edit set image frontend=<ECR_REPO_URL>:<NEW_TAG_HERE>
+      - name: Set image tag from build stage
+        run: cd starter/backend/k8s && kustomize edit set image frontend=${{ steps.login-ecr.outputs.registry }}:${{ github.sha }}
 
-      #- name: Apply the Kubernetes manifests to the cluster
-      #  run: |
-      #    cd starter/frontend/k8s && kustomize build
-      #    cd starter/frontend/k8s && kubectl apply -f -
+      - name: Apply the Kubernetes manifests to the cluster
+        run: |
+          cd starter/backend/k8s && kustomize build
+          cd starter/backend/k8s && kubectl apply -f -
 
 
