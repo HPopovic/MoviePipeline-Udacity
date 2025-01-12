@@ -119,7 +119,7 @@ jobs:
 
       - name: Apply the Kubernetes manifests to the cluster
         run: |
-          cd starter/backend/k8s && kustomize build
-          kubectl apply -f -
+          cd starter/backend/k8s
+          kustomize build | kubectl apply -f -
 
 
