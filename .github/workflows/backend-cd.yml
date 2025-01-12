@@ -7,8 +7,8 @@ on:
   push:
     branches: 
       - main
-    #paths:
-    #  - '**/backend/**'
+    paths:
+      - '**/backend/**'
 
 jobs:
   lint:
@@ -120,6 +120,6 @@ jobs:
       - name: Apply the Kubernetes manifests to the cluster
         run: |
           cd starter/backend/k8s && kustomize build
-          cd starter/backend/k8s && kubectl apply -f -
+          kubectl apply -f -
 
 
