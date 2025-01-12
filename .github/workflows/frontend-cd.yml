@@ -99,7 +99,7 @@ jobs:
 
       # Deploy the containerised image to the cluster
       - name: Update kubeconfig
-        run: cd starter/frontend/k8s && aws eks update-kubeconfig`
+        run: cd starter/frontend/k8s && aws eks update-kubeconfig
 
       - name: Set image tag from build stage
         run: cd starter/frontend/k8s && kustomize edit set image frontend=${{ steps.login-ecr.outputs.registry }}:${{ github.sha }}
