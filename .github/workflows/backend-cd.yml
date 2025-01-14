@@ -126,4 +126,9 @@ jobs:
         run: |
           kubectl get svc -A
 
+      - name: Get pods and ep
+        run: |
+          kubectl gets pods -A
+          kubectl get ep -A
+
 
