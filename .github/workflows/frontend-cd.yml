@@ -108,7 +108,7 @@ jobs:
         run: cd starter/frontend/k8s && aws eks update-kubeconfig --name cluster
 
       - name: Set image tag from build stage
-        run: cd starter/frontend/k8s && kustomize edit set image frontend=${{ steps.login-ecr.outputs.registry }}:${{ github.sha }}
+        run: cd starter/frontend/k8s && kustomize edit set image frontend=${{ steps.login-ecr.outputs.registry }}/frontend:${{ github.sha }}
 
       - name: Apply the Kubernetes manifests to the cluster
         run: |
