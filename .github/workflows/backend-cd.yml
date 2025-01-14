@@ -128,7 +128,7 @@ jobs:
 
       - name: Get pods and ep
         run: |
-          kubectl gets pods -A
+          kubectl get pods -A
           kubectl get ep -A
 
 
