@@ -115,4 +115,6 @@ jobs:
           cd starter/frontend/k8s
           kustomize build | kubectl apply -f -
 
-      
+      - name: Print application URLs
+        run: |
+          kubectl get svc -A
