@@ -49,6 +49,12 @@ jobs:
           node-version: latest
       
       # Cache action to restore cache.
+      - uses: actions/cache@v3
+        with:
+          path: starter/frontend/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('starter/frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       # Install the dependencies.
       - run: cd starter/frontend && npm ci
@@ -71,6 +77,12 @@ jobs:
           node-version: latest
 
       # Cache action to restore cache.
+      - uses: actions/cache@v3
+        with:
+          path: starter/frontend/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('starter/frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       # Install the dependencies.
       - run: cd starter/frontend && npm ci
@@ -82,3 +94,5 @@ jobs:
       - name: Run docker image    
         run: cd starter/frontend && docker run --name mp-frontend -p 3000:3000 -d mp-frontend
 
+      - name: Run tests
+        run:  npm test
