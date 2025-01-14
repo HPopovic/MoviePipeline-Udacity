@@ -95,4 +95,4 @@ jobs:
         run: cd starter/frontend && docker run --name mp-frontend -p 3000:3000 -d mp-frontend
 
       - name: Run tests
-        run:  npm test
+        run: cd starter/frontend && npm run test
