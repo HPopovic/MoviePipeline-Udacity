@@ -78,8 +78,8 @@ jobs:
       - run: cd starter/frontend && npm ci
 
       # Build the image.
-      - name: Build docker image
-        run: cd starter/frontend && docker build --build-arg=${{env.REACT_APP_MOVIE_API_URL}} --tag=mp-frontend:latest .
+      #- name: Build docker image
+      #  run: cd starter/frontend && docker build --build-arg=REACT_APP_MOVIE_API_URL=${{env.REACT_APP_MOVIE_API_URL}} --tag=mp-frontend:latest .
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -88,7 +88,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
    
-      # Deploy the image to ECR
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
