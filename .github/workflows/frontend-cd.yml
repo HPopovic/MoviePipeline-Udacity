@@ -1,7 +1,7 @@
 name: frontend-cd-workflow
 
 env:
-  REACT_APP_MOVIE_API_URL: 'http://a6eec2b7fcfb94cd0a177cb2e33c0425-277787947.us-east-1.elb.amazonaws.com'
+  REACT_APP_MOVIE_API_URL: 'http://a7b4bbb60ad7742fc85f716158005436-2038726204.us-east-1.elb.amazonaws.com'
 
 on:
   # Run on demand
