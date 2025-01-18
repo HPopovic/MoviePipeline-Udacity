@@ -77,10 +77,6 @@ jobs:
       # Install the dependencies.
       - run: cd starter/frontend && npm ci
 
-      # Build the image.
-      #- name: Build docker image
-      #  run: cd starter/frontend && docker build --build-arg=REACT_APP_MOVIE_API_URL=${{env.REACT_APP_MOVIE_API_URL}} --tag=mp-frontend:latest .
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -122,7 +118,3 @@ jobs:
         run: |
           kubectl get pods -A
           kubectl get ep -A
-
-      - name: Describe frontend pod
-        run: |
-          kubectl describe pod frontend-5677c6cb89-ns7xc
